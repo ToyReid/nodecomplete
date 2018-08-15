@@ -1,12 +1,46 @@
-console.log('Starting notes.js')
+console.log('Starting notes.js');
 
-// console.log(module);
-// Using arrow function, acts as 'function () {}'
-module.exports.addNote = () => {
-	console.log('addNotes');
-	return 'New note';
-}
+const fs = require('fs');
 
-module.exports.add = (a, b) => {
-	return a + b;
-}
+var addNote = (title, body) => {
+	var notes = [];
+	var note = {
+		title,
+		body
+	};
+
+	try {
+		var notesString = fs.readFileSync('notes-data.json');
+		notes = JSON.parse(notesString);
+	} catch (error) {};
+
+	// Enumerate through notes and determine if there is already a note with given title
+	var duplicateNotes = notes.filter((note) => note.title === title);
+	// var duplicateNotes = notes.filter((note) => {
+	// 	return note.title === title;
+	// });
+
+	if (duplicateNotes.length === 0) {
+		notes.push(note);
+		fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+	};
+};
+
+var getAll = () => {
+	console.log('Getting all notes');
+};
+
+var getNote = (title) => {
+	console.log('Getting note', title);
+};
+
+var removeNote = (title) => {
+	console.log('Removing note', title);
+};
+
+module.exports = {
+	addNote,
+	getAll,
+	getNote,
+	removeNote
+};

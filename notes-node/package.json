@@ -6,9 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Toy Reid",
+  "author": "Andrew Mead",
   "license": "ISC",
   "dependencies": {
-    "lodash": "^4.17.10"
+    "lodash": "^4.13.1",
+    "yargs": "^4.8.1"
   }
 }
